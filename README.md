@@ -30,3 +30,4 @@ spring.jpa.hibernate.ddl-auto=update
   - `test-backend/src/main/java/com/example/testweb/TestWebApplication.java` 파일 실행
 - React:
   - `test-backend/src/main/test-frontend/`에서 npm install 및 npm start 실행
+  - 파일이 없다면 https://github.com/JaeyeoneeJ/test-frontend 에서 깃을 클론하고 해당 폴더를 `test-backend/src/main`에 위치하게 함
