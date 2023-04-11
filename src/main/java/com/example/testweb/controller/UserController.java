@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResponse putUser(@PathVariable @NotBlank @Size(min=6, max=16) Integer id,
+    public UserResponse putUser(@PathVariable @NotBlank Integer id,
                                 @Valid @RequestBody UserRequest userRequest) {
         if(!id.equals(userRequest.getId())) {
             throw new InvalidRequestException("id mismatch");
