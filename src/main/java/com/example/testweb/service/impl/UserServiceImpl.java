@@ -46,11 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(Integer id, UserRequest userRequest) {
-        if (repository.findByAccountId(userRequest.getAccountId()) != null) {
-            throw new DuplicatedException("AccountId is duplicated");
-        }
-
-        if (repository.findById(userRequest.getId()) == null) {
+        if (repository.findById(userRequest.getId()).isPresent()) {
             throw new NotFoundException("Not found account");
         } else {
             User user = repository.findById(userRequest.getId()).get();
