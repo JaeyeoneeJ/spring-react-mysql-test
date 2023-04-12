@@ -46,14 +46,16 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(Integer id, UserRequest userRequest) {
-
+        if (repository.findById(userRequest.getId()).isPresent()) {
+            throw new NotFoundException("Not found account");
+        } else {
             User user = repository.findById(userRequest.getId()).get();
             user.setAccountId(userRequest.getAccountId());
             user.setName(userRequest.getName());
             user.setAge(userRequest.getAge());
             user = repository.save(user);
             return user;
-
+        }
     }
 
     @Override

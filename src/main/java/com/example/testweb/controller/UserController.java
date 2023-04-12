@@ -55,5 +55,4 @@ public class UserController {
         service.deleteUserById(userRequest.getAccountId());
     }
 
-
 }
