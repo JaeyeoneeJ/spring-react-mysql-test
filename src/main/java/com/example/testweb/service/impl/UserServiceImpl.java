@@ -12,8 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -26,11 +24,15 @@ public class UserServiceImpl implements UserService {
         return  repository.findAll();
     }
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Optional<User> findByAccountId(String accountId) {
+//        return Optional.ofNullable(repository.findByAccountId(accountId));
+//    }
+
     @Override
     @Transactional(readOnly = true)
-    public Optional<User> findByAccountId(String accountId) {
-        return Optional.ofNullable(repository.findByAccountId(accountId));
-    }
+    public Iterable<User> searchUser(String searchId) { return repository.findByAccountIdContaining(searchId);}
 
     @Override
     @Transactional
@@ -46,15 +48,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User updateUser(Integer id, UserRequest userRequest) {
-        if (repository.findById(userRequest.getId())==null) {
-            throw new NotFoundException("Not found account");
-        } else {
+        if (repository.findById(userRequest.getId()).isPresent()) {
             User user = repository.findById(userRequest.getId()).get();
             user.setAccountId(userRequest.getAccountId());
             user.setName(userRequest.getName());
             user.setAge(userRequest.getAge());
             user = repository.save(user);
             return user;
+        } else {
+            throw new NotFoundException("Not found account");
         }
     }
 

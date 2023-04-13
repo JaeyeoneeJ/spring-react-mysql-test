@@ -15,7 +15,7 @@ public class UserRequest {
     String accountId;
 
     @NotBlank
-    @Size(min=2, max=20)
+    @Size(min=1, max=20)
     String name;
 
     @NotNull

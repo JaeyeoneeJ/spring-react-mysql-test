@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -23,14 +22,12 @@ public class UserController {
 
     @GetMapping("")
     public Iterable<User> getUserList() {
-        Iterable<User> userList = service.selectAll();
-        return userList;
+        return service.selectAll();
     }
 
-    @GetMapping("/{accountId}")
-    public Optional<User> getUserByAccountId(@PathVariable @NotBlank @Size(min=4, max=64) String accountId) {
-        Optional<User> userOpt = service.findByAccountId(accountId);
-        return userOpt;
+    @GetMapping("/{searchId}")
+    public Iterable<User> getSearchUserByAccountId(@PathVariable @NotBlank @Size(min=2, max=64) String searchId) {
+        return service.searchUser(searchId);
     }
 
     @PostMapping("")
