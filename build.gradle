@@ -31,6 +31,14 @@ dependencies {
 	runtimeOnly('org.springframework.boot:spring-boot-starter-data-jpa')
 }
 
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'com.example.testweb.TestWebApplication'
+		)
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
